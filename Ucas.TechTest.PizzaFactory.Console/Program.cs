@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Ucas.TechTest.PizzaFactory.Console
+﻿namespace Ucas.TechTest.PizzaFactory.Console
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+
+    public class Program
     {
         private const double BaseTimeMs = 3000;
         private const double CookingIntervalMs = 1000;
         private const double TimePerToppingLetterMs = 100;
         private const int PizzasRequired = 50;
+        private const string OutputFilePath = @"E:\Lew\My Documents\UcasTechTest\CookedPizzas.txt";
 
         private static readonly IReadOnlyDictionary<string, double> PizzaBaseCookingTimeMultipliers = new Dictionary<string, double>
         {
@@ -39,7 +39,7 @@ namespace Ucas.TechTest.PizzaFactory.Console
             var basesCount = pizzaBases.Count;
             var toppingsCount = Toppings.Count;
 
-            while(pizzaCount < 50)
+            while(pizzaCount < PizzasRequired)
             {
                 double cookingTimeMs;
 
@@ -73,6 +73,10 @@ namespace Ucas.TechTest.PizzaFactory.Console
                 // Increment counter
                 ++pizzaCount;
             }
+
+            File.WriteAllLines(
+                OutputFilePath,
+                CookedPizzas);
         }
     }
 }
