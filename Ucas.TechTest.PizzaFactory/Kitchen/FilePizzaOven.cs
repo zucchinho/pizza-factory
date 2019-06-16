@@ -28,7 +28,7 @@
             await Task.Delay(
                 TimeSpan.FromMilliseconds(cookingTimeMs));
 
-            using(var sw = new StreamWriter(OutputFilePathLazy.Value))
+            using(var sw = new StreamWriter(OutputFilePathLazy.Value, true))
             {
                 await sw.WriteLineAsync(pizza.ToString("C"));
             }

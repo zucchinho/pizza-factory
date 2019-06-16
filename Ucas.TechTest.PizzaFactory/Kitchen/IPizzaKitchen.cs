@@ -21,10 +21,5 @@
         Task ProcessOrderAsync(
             IPizzaOrder pizzaOrder,
             CancellationToken cancellationToken);
-
-        /// <summary>
-        /// Occurs when [cooking interval].
-        /// </summary>
-        event Func<double> CookingInterval;
     }
 }

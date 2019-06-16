@@ -21,23 +21,12 @@
                 return Convert.ToDouble(ConfigurationManager.AppSettings["PizzaKitchen.TimePerToppingLetterMilliseconds"]);
             });
 
-        private static readonly Lazy<double> DefaultCookingIntervalMsLazy = new Lazy<double>(
-            () =>
-            {
-                return Convert.ToDouble(ConfigurationManager.AppSettings["PizzaKitchen.DefaultCookingIntervalMilliseconds"]);
-            });
-
         private readonly IPizzaOven pizzaOven;
 
         public PizzaKitchen(IPizzaOven pizzaOven)
         {
             this.pizzaOven = pizzaOven;
-
-            // Add a simple delegate to return the default interval (from the config)
-            this.CookingInterval += () => DefaultCookingIntervalMsLazy.Value;
         }
-
-        public event Func<double> CookingInterval;
 
         public async Task ProcessOrderAsync(
             IPizzaOrder pizzaOrder, 
@@ -55,10 +44,6 @@
                 pizzaOrder,
                 cookingTimeMs,
                 cancellationToken);
-
-            // Simulate the cooking interval
-            await Task.Delay(
-                TimeSpan.FromMilliseconds(this.CookingInterval.Invoke()));
         }
     }
 }

@@ -1,82 +1,43 @@
 ﻿namespace Ucas.TechTest.PizzaFactory.Console
 {
     using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
+    using System.Configuration;
     using System.Threading;
+    using Ucas.TechTest.PizzaFactory.Kitchen;
+    using Ucas.TechTest.PizzaFactory.Model;
+    using Ucas.TechTest.PizzaFactory.Restaurant;
+    using Unity;
+    using Unity.Lifetime;
 
     public class Program
     {
-        private const double BaseTimeMs = 3000;
-        private const double CookingIntervalMs = 1000;
-        private const double TimePerToppingLetterMs = 100;
-        private const int PizzasRequired = 5;
-        private const string OutputFilePath = @"E:\Lew\Documents\CookedPizzas.txt";
-
-        private static readonly IReadOnlyDictionary<string, double> PizzaBaseCookingTimeMultipliers = new Dictionary<string, double>
-        {
-            { "Deep Pan", 2 },
-            { "Stuffed Crust", 1.5},
-            { "Thin and Crispy", 2 }
-        };
-
-        private static readonly IList<string> Toppings = new List<string>
-        {
-            "Ham and Mushroom",
-            "Pepperoni",
-            "Vegetable"
-        };
-
-        private static readonly IList<string> CookedPizzas = new List<string>();
-
         static void Main(string[] args)
         {
-            var pizzaCount = 0;
+            var partySize = Convert.ToInt32(
+                ConfigurationManager.AppSettings["PizzaFactory.PartySize"]);
 
-            var pizzaBases = PizzaBaseCookingTimeMultipliers.Keys.ToList();
-            var rnd = new Random();
-            var basesCount = pizzaBases.Count;
-            var toppingsCount = Toppings.Count;
-
-            while(pizzaCount < PizzasRequired)
+            using(var container = new UnityContainer())
+            using(var cts = new CancellationTokenSource())
             {
-                double cookingTimeMs;
+                ConfigureDependencies(container);
 
-                // Get random base
-                var pizzaBase = pizzaBases[rnd.Next(basesCount)];
-                var baseMultiplier = PizzaBaseCookingTimeMultipliers[pizzaBase];
+                var pizzeria = container.Resolve<IPizzeria>();
 
-                // Get random topping
-                var topping = Toppings[rnd.Next(toppingsCount)];
-
-                // Generate pizza description
-                var pizzaDesc = $"{pizzaBase} w/ {topping}";
-
-                // Calculate cooking time
-                cookingTimeMs = baseMultiplier * BaseTimeMs;
-                var toppingMultiplier = Convert.ToDouble(
-                    topping.Count(c => char.IsLetter(c)));
-
-                cookingTimeMs += (toppingMultiplier * TimePerToppingLetterMs);
-
-                // Simulate cooking
-                Thread.Sleep(
-                    TimeSpan.FromMilliseconds(cookingTimeMs));
-
-                CookedPizzas.Add(pizzaDesc);
-
-                // Wait cooking interval
-                Thread.Sleep(
-                    TimeSpan.FromMilliseconds(CookingIntervalMs));
-
-                // Increment counter
-                ++pizzaCount;
+                pizzeria.CaterAsync(
+                    partySize,
+                    cts.Token).Wait(
+                    cts.Token);
             }
+        }
 
-            File.WriteAllLines(
-                OutputFilePath,
-                CookedPizzas);
+        private static void ConfigureDependencies(IUnityContainer container)
+        {
+            container.RegisterType<IPizzeria, Pizzeria>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IPizzeriaWaiter, RpgWaiter>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IPizzaMenu, DummyPizzaMenu>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IPizzaKitchen, PizzaKitchen>(new ContainerControlledLifetimeManager());
+
+            container.RegisterType<IPizzaOven, FilePizzaOven>(new ContainerControlledLifetimeManager());
         }
     }
 }

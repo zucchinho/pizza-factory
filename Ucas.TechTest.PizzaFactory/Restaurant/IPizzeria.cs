@@ -9,5 +9,10 @@ namespace Ucas.TechTest.PizzaFactory.Restaurant
         Task CaterAsync(
             int partySize,
             CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Occurs when [order interval].
+        /// </summary>
+        event Func<double> OrderInterval;
     }
 }
