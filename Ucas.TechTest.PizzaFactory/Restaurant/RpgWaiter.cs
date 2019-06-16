@@ -46,6 +46,7 @@
                 "Generated random pizza topping",
                 topping);
 
+            // Return the order
             return new PizzaOrder(
                 pizzaBase,
                 topping);

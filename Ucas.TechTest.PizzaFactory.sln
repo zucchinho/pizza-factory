@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucas.TechTest.PizzaFactory", "Ucas.TechTest.PizzaFactory\Ucas.TechTest.PizzaFactory.csproj", "{7805685F-9292-4C3E-AE5F-2673C4DAA149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ucas.TechTest.PizzaFactory", "Ucas.TechTest.PizzaFactory\Ucas.TechTest.PizzaFactory.csproj", "{7805685F-9292-4C3E-AE5F-2673C4DAA149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ucas.TechTest.PizzaFactory.Test", "Ucas.TechTest.PizzaFactory.Test\Ucas.TechTest.PizzaFactory.Test.csproj", "{F4209848-15F8-46F5-B91D-6F990506C681}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{7805685F-9292-4C3E-AE5F-2673C4DAA149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7805685F-9292-4C3E-AE5F-2673C4DAA149}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7805685F-9292-4C3E-AE5F-2673C4DAA149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4209848-15F8-46F5-B91D-6F990506C681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4209848-15F8-46F5-B91D-6F990506C681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4209848-15F8-46F5-B91D-6F990506C681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4209848-15F8-46F5-B91D-6F990506C681}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

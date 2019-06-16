@@ -49,30 +49,42 @@
             int partySize, 
             CancellationToken cancellationToken)
         {
-            var processedOrders = 0;
+            var orderNumber = 0;
 
-            while (processedOrders < partySize
+            while (orderNumber < partySize
                 && !cancellationToken.IsCancellationRequested)
             {
                 // Increment counter
-                ++processedOrders;
+                ++orderNumber;
 
                 this.logger.Info(
                     "Beginning to process new order: {0}",
-                    processedOrders);
+                    orderNumber);
 
-                var nextOrder = this.waiter.GetNextOrder();
+                try
+                {
+                    // Get the next order via the waiter
+                    var nextOrder = this.waiter.GetNextOrder();
 
-                // Wait for the kitchen to process the order
-                await this.pizzaKitchen.ProcessOrderAsync(
-                    nextOrder,
-                    cancellationToken);
+                    // Wait for the kitchen to process the order
+                    await this.pizzaKitchen.ProcessOrderAsync(
+                        nextOrder,
+                        cancellationToken);
+                }
+                catch (Exception ex)
+                {
+                    this.logger.Fatal(
+                        ex,
+                        "Something went wrong with order: {0}",
+                        orderNumber);
+                    throw;
+                }
 
                 this.logger.Info(
                     "Finished processing order: {0}",
-                    processedOrders);
+                    orderNumber);
 
-                if(processedOrders == partySize)
+                if(orderNumber == partySize)
                 {
                     this.logger.Info(
                         "That was the last order.");
@@ -86,7 +98,8 @@
                     nextIntervalMs);
 
                 await Task.Delay(
-                    TimeSpan.FromMilliseconds(nextIntervalMs));
+                    TimeSpan.FromMilliseconds(nextIntervalMs),
+                    cancellationToken);
             }
         }
     }

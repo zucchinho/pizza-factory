@@ -17,6 +17,7 @@
             });
 
         private readonly ILogger logger;
+        private CancellationTokenSource internalTokenSource;
 
         public FilePizzaOven()
             : this(null)
@@ -27,7 +28,9 @@
             ILogger logger)
         {
             this.logger = logger ?? LogManager.CreateNullLogger();
+            this.internalTokenSource = new CancellationTokenSource();
 
+            // Delete any left-over file
             if (File.Exists(OutputFilePathLazy.Value))
             {
                 this.logger.Warn(
@@ -53,15 +56,28 @@
 
             // Simulate cooking
             await Task.Delay(
-                TimeSpan.FromMilliseconds(cookingTimeMs));
+                TimeSpan.FromMilliseconds(cookingTimeMs),
+                cancellationToken);
 
             this.logger.Debug(
                 "Finished cooking pizza. Writing to output file: {0}",
                 OutputFilePathLazy.Value);
 
-            using(var sw = new StreamWriter(OutputFilePathLazy.Value, true))
+            try
             {
-                await sw.WriteLineAsync(pizza.ToString("C"));
+                using (var sw = new StreamWriter(OutputFilePathLazy.Value, true))
+                {
+                    await sw.WriteLineAsync(
+                        pizza.ToString("C"));
+                }
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                this.logger.Fatal(
+                    ex,
+                    "The output file directory path does not exist: {0}",
+                    OutputFilePathLazy.Value);
+                throw;
             }
         }
     }

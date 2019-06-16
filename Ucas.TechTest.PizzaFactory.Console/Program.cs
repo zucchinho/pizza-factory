@@ -12,7 +12,7 @@
 
     public class Program
     {
-        private static readonly ILogger logger = LogManager.CreateNullLogger();
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
         {
@@ -23,7 +23,7 @@
                 partySize);
 
             using(var container = new UnityContainer())
-            using(var cts = new CancellationTokenSource())
+            using (var cts = new CancellationTokenSource())
             {
                 ConfigureDependencies(container);
 

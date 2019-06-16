@@ -54,7 +54,7 @@
                 "Calculated total cooking time for pizza: {0}ms",
                 cookingTimeMs);
 
-            // Cook the pizza
+            // Cook the pizza (in the oven)
             await this.pizzaOven.CookAsync(
                 pizzaOrder,
                 cookingTimeMs,
