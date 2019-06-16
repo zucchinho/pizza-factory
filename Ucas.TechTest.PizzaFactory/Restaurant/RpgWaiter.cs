@@ -4,18 +4,41 @@
     using System;
     using Ucas.TechTest.PizzaFactory.Model;
 
+    /// <summary>
+    /// Dummy implementation of a pizzeria waiter (randomly generates pizza order combinations)
+    /// </summary>
+    /// <seealso cref="Ucas.TechTest.PizzaFactory.Restaurant.IPizzeriaWaiter" />
     public class RpgWaiter : IPizzeriaWaiter
     {
+        /// <summary>
+        /// The random
+        /// </summary>
         private static Random rnd;
+        /// <summary>
+        /// The pizza menu
+        /// </summary>
         private readonly IPizzaMenu pizzaMenu;
+        /// <summary>
+        /// The logger
+        /// </summary>
         private readonly ILogger logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RpgWaiter"/> class.
+        /// </summary>
+        /// <param name="pizzaMenu">The pizza menu.</param>
         public RpgWaiter(
             IPizzaMenu pizzaMenu)
             : this(pizzaMenu, null)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RpgWaiter"/> class.
+        /// </summary>
+        /// <param name="pizzaMenu">The pizza menu.</param>
+        /// <param name="logger">The logger.</param>
+        /// <exception cref="System.ArgumentNullException">pizzaMenu</exception>
         public RpgWaiter(
             IPizzaMenu pizzaMenu, 
             ILogger logger)
@@ -26,6 +49,10 @@
             rnd = new Random();
         }
 
+        /// <summary>
+        /// Gets the next order.
+        /// </summary>
+        /// <returns></returns>
         public IPizzaOrder GetNextOrder()
         {
             // Get random base

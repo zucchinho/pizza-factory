@@ -1,6 +1,5 @@
 ﻿namespace Ucas.TechTest.PizzaFactory.Kitchen
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
     using Ucas.TechTest.PizzaFactory.Model;

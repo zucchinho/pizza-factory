@@ -7,18 +7,39 @@
     using System.Threading.Tasks;
     using Ucas.TechTest.PizzaFactory.Kitchen;
 
+    /// <summary>
+    /// Generic implementation of a pizzeria, caters to pizza parties
+    /// </summary>
+    /// <seealso cref="Ucas.TechTest.PizzaFactory.Restaurant.IPizzeria" />
     public class Pizzeria : IPizzeria
     {
+        /// <summary>
+        /// The waiter
+        /// </summary>
         private readonly IPizzeriaWaiter waiter;
+        /// <summary>
+        /// The pizza kitchen
+        /// </summary>
         private readonly IPizzaKitchen pizzaKitchen;
+        /// <summary>
+        /// The logger
+        /// </summary>
         private readonly ILogger logger;
 
+        /// <summary>
+        /// The default cooking interval ms lazy
+        /// </summary>
         private static readonly Lazy<double> DefaultCookingIntervalMsLazy = new Lazy<double>(
             () =>
             {
                 return Convert.ToDouble(ConfigurationManager.AppSettings["Pizzeria.DefaultOrderIntervalMilliseconds"]);
             });
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Pizzeria"/> class.
+        /// </summary>
+        /// <param name="waiter">The waiter.</param>
+        /// <param name="pizzaKitchen">The pizza kitchen.</param>
         public Pizzeria(
             IPizzeriaWaiter waiter, 
             IPizzaKitchen pizzaKitchen)
@@ -26,6 +47,17 @@
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Pizzeria"/> class.
+        /// </summary>
+        /// <param name="waiter">The waiter.</param>
+        /// <param name="pizzaKitchen">The pizza kitchen.</param>
+        /// <param name="logger">The logger.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// waiter
+        /// or
+        /// pizzaKitchen
+        /// </exception>
         public Pizzeria(
             IPizzeriaWaiter waiter, 
             IPizzaKitchen pizzaKitchen, 
@@ -45,10 +77,23 @@
         /// </summary>
         public event Func<double> OrderInterval;
 
+        /// <summary>
+        /// Caters the asynchronous.
+        /// </summary>
+        /// <param name="partySize">Size of the party.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
         public async Task CaterAsync(
             int partySize, 
             CancellationToken cancellationToken)
         {
+            if(partySize < 1)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(partySize),
+                    "Must be greater than zero.");
+            }
+
             var orderNumber = 0;
 
             while (orderNumber < partySize

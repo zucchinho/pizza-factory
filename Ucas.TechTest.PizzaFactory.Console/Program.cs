@@ -10,10 +10,20 @@
     using Unity;
     using Unity.Lifetime;
 
+    /// <summary>
+    /// Creates a pizzeria and caters to the pizza party
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// The logger
+        /// </summary>
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
             var partySize = Convert.ToInt32(
@@ -44,6 +54,10 @@
             }
         }
 
+        /// <summary>
+        /// Configures the dependencies.
+        /// </summary>
+        /// <param name="container">The container.</param>
         private static void ConfigureDependencies(IUnityContainer container)
         {
             // Register the logger
