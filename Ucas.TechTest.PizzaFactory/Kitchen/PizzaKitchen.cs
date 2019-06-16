@@ -1,5 +1,6 @@
 ﻿namespace Ucas.TechTest.PizzaFactory.Kitchen
 {
+    using NLog;
     using System;
     using System.Configuration;
     using System.Linq;
@@ -22,10 +23,20 @@
             });
 
         private readonly IPizzaOven pizzaOven;
+        private readonly ILogger logger;
 
-        public PizzaKitchen(IPizzaOven pizzaOven)
+        public PizzaKitchen(
+            IPizzaOven pizzaOven)
+            : this(pizzaOven, null)
         {
-            this.pizzaOven = pizzaOven;
+        }
+
+        public PizzaKitchen(
+            IPizzaOven pizzaOven,
+            ILogger logger)
+        {
+            this.pizzaOven = pizzaOven ?? throw new ArgumentNullException(nameof(pizzaOven));
+            this.logger = logger ?? LogManager.CreateNullLogger();
         }
 
         public async Task ProcessOrderAsync(
@@ -37,7 +48,11 @@
             var toppingMultiplier = Convert.ToDouble(
                 pizzaOrder.Topping.Count(c => char.IsLetter(c)));
 
-            cookingTimeMs += (toppingMultiplier * TimePerToppingLetterMsLazy.Value);
+            cookingTimeMs += toppingMultiplier * TimePerToppingLetterMsLazy.Value;
+
+            this.logger.Debug(
+                "Calculated total cooking time for pizza: {0}ms",
+                cookingTimeMs);
 
             // Cook the pizza
             await this.pizzaOven.CookAsync(

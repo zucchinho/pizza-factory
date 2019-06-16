@@ -14,6 +14,11 @@
 
         public TimeSpan CookingTime { get; }
 
+        public new string ToString()
+        {
+            return this.ToString("U");
+        }
+
         public string ToString(string format)
         {
             return this.ToString(format, null);
@@ -21,7 +26,7 @@
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            switch(format)
+            switch(format ?? "U")
             {
                 case "C":
                     return $"{this.Name} w/ {this.Topping} cooked in {this.CookingTime.TotalMilliseconds}ms";

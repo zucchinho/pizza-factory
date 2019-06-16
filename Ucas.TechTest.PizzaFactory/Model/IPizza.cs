@@ -6,6 +6,8 @@
     {
         TimeSpan CookingTime { get; }
 
+        string ToString();
+
         string ToString(string format);
     }
 }
