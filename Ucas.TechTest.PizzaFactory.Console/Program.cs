@@ -11,8 +11,8 @@
         private const double BaseTimeMs = 3000;
         private const double CookingIntervalMs = 1000;
         private const double TimePerToppingLetterMs = 100;
-        private const int PizzasRequired = 50;
-        private const string OutputFilePath = @"E:\Lew\My Documents\UcasTechTest\CookedPizzas.txt";
+        private const int PizzasRequired = 5;
+        private const string OutputFilePath = @"E:\Lew\Documents\CookedPizzas.txt";
 
         private static readonly IReadOnlyDictionary<string, double> PizzaBaseCookingTimeMultipliers = new Dictionary<string, double>
         {
