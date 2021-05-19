@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -18,18 +16,22 @@ namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
         private readonly IMenuReader _menuReader;
         private readonly IOrderWriter _orderWriter;
         private readonly IOrderReader _orderReader;
+        private readonly IOrdersReader _ordersReader;
+        private readonly IOrderUpdater _ordersUpdater;
 
-        public OrdersController(ILogger logger, IMenuReader menuReader, IOrderWriter orderWriter, IOrderReader orderReader)
+        public OrdersController(ILogger logger, IMenuReader menuReader, IOrderWriter orderWriter, IOrderReader orderReader, IOrdersReader ordersReader, IOrderUpdater ordersUpdater)
         {
             _logger = logger;
             _menuReader = menuReader;
             _orderWriter = orderWriter;
             _orderReader = orderReader;
+            _ordersReader = ordersReader;
+            _ordersUpdater = ordersUpdater;
         }
 
         [Route("menu")]
         [HttpGet]
-        public Task<IPizzaMenu> Get(CancellationToken cancellationToken)
+        public Task<IPizzaMenu> GetMenu(CancellationToken cancellationToken)
         {
             return this._menuReader.GetMenuAsync(cancellationToken);
         }
@@ -42,9 +44,24 @@ namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<IOrder> Post(string orderNumber, CancellationToken cancellationToken)
+        [Route("{orderNumber}")]
+        public Task<IOrder> GetOrder([FromRoute] string orderNumber, CancellationToken cancellationToken)
         {
             return this._orderReader.GetOrderAsync(orderNumber, cancellationToken);
+        }
+
+        [HttpGet]
+        [Route("orders/{orderStatus}")]
+        public Task<IEnumerable<IOrder>> GetOrders(OrderStatus orderStatus, CancellationToken cancellationToken)
+        {
+            return this._ordersReader.GetOrdersAsync(orderStatus, cancellationToken);
+        }
+
+        [HttpPut]
+        [Route("order/{orderNumber}/{orderStatus}")]
+        public Task UpdateOrder(OrderStatus orderStatus, CancellationToken cancellationToken)
+        {
+            return this._ordersUpdater.UpdateOrderAsync(orderStatus, cancellationToken);
         }
     }
 }
