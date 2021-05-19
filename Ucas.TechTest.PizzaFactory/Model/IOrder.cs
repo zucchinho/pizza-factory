@@ -4,7 +4,7 @@ namespace Ucas.TechTest.PizzaFactory.Model
 {
     public interface IOrder
     {
-        IReadOnlyList<IPizza> Pizzas { get; }
+        IEnumerable<IPizzaOrder> Pizzas { get; }
         string OrderNumber { get; }
         OrderStatus Status { get; }
     }

@@ -1,6 +1,9 @@
 Web Client (Angular)
+  Create party
+    Input party size?
+    Input table number?    
   Order page
-    Display menu
+    Display menu for each person - let them choose
     Create an order
     Get an update about an order
   Updates page
@@ -9,17 +12,23 @@ Web Client (Angular)
 WebApi (.NET Core)
   Endpoints
     Customer
-      GetMenu - GET - returns available toppings and bases
-      CreateOrder - POST - requests order for some pizzas
-      GetUpdate - GET - returns an update for an order id
+      Menu
+        GetMenu - GET - returns available toppings and bases
+      Orders
+        CreateOrder - POST - requests order for some pizzas
+        GetUpdate - GET - returns an update for an order id
+      Party
+        CreateParty - Post - party size and table number
     Staff
-      GetOrders - GET - gets all orders with a status, default to received orders
-      UpdateOrder - PUT - updates status of an order e.g., received, preparing, ready, en route, delivered, problem
+      Orders
+        GetOrders - GET - gets all orders with a status, default to received orders
+        UpdateOrder - PUT - updates status of an order e.g., received, preparing, ready, en route, delivered, problem
   Factory
     Restaurant
       Reads menu from the DB
       Writes new orders to the DB
       Reads updates for orders from DB
+      Writes new parties to DB
     Kitchen
       Reads orders from the database
       Writes updates to orders to the DB

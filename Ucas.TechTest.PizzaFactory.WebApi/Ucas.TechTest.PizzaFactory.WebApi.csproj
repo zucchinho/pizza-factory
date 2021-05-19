@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Ucas.TechTest.PizzaFactory.Mongo\Ucas.TechTest.PizzaFactory.Mongo.csproj" />
       <ProjectReference Include="..\Ucas.TechTest.PizzaFactory\Ucas.TechTest.PizzaFactory.csproj" />
     </ItemGroup>
 
