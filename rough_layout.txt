@@ -27,5 +27,6 @@ WebApi (.NET Core)
 DB (NoSQL - Mongo?)
   Stores orders
   Stores menu items
+  Stores parties (group of people at table)
 
 Run these locally in docker
