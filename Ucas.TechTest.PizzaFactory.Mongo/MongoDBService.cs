@@ -10,7 +10,7 @@ using Ucas.TechTest.PizzaFactory.Restaurant;
 
 namespace Ucas.TechTest.PizzaFactory.Mongo
 {
-    public class MongoDBService : IOrderWriter, IOrdersReader, IOrderReader, IPartyWriter, IMenuReader
+    public class MongoDBService : IOrderWriter, IOrderUpdater, IOrdersReader, IOrderReader, IPartyWriter, IMenuReader
     {
         private readonly IMongoCollection<Order> _orders;
         private readonly IMongoCollection<Party> _parties;
@@ -168,6 +168,26 @@ namespace Ucas.TechTest.PizzaFactory.Mongo
         }
 
         public IPizzaMenu GetMenu()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateOrderAsync(string orderNumber, OrderStatus orderStatus)
+        {
+            return this.UpdateOrderAsync(orderNumber, orderStatus, CancellationToken.None);
+        }
+
+        public async Task<bool> UpdateOrderAsync(string orderNumber, OrderStatus orderStatus, CancellationToken cancellationToken)
+        {
+            var result = await this._orders.UpdateOneAsync(
+                o => o.Id == orderNumber, 
+                Builders<Order>.Update.Set(o => o.Status, orderStatus), 
+                new UpdateOptions(), cancellationToken);
+
+            return result.IsAcknowledged && result.ModifiedCount > 0;
+        }
+
+        public bool UpdateOrder(string orderNumber, OrderStatus orderStatus)
         {
             throw new NotImplementedException();
         }

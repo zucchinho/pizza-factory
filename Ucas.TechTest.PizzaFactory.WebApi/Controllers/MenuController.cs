@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NLog;
 using Ucas.TechTest.PizzaFactory.Model;
 using Ucas.TechTest.PizzaFactory.Restaurant;
@@ -12,10 +13,10 @@ namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
     [Route("menu")]
     public class MenuController : ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<MenuController> _logger;
         private readonly IMenuReader _menuReader;
 
-        public MenuController(ILogger logger, IMenuReader menuReader, IOrderWriter orderWriter, IOrderReader orderReader, IOrdersReader ordersReader, IOrderUpdater ordersUpdater)
+        public MenuController(ILogger<MenuController> logger, IMenuReader menuReader)
         {
             _logger = logger;
             _menuReader = menuReader;

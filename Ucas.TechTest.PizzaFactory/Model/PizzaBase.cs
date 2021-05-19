@@ -6,6 +6,9 @@
     /// <seealso cref="Ucas.TechTest.PizzaFactory.Model.IPizzaBase" />
     public class PizzaBase : IPizzaBase
     {
+        public PizzaBase()
+        {}
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PizzaBase"/> class.
         /// </summary>
@@ -25,7 +28,7 @@
         /// <value>
         /// The name.
         /// </value>
-        public string Name { get; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets the multiplier.
@@ -33,6 +36,6 @@
         /// <value>
         /// The multiplier.
         /// </value>
-        public double Multiplier { get; }
+        public double Multiplier { get; set; }
     }
 }

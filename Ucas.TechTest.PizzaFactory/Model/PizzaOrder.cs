@@ -7,6 +7,9 @@
     /// <seealso cref="Ucas.TechTest.PizzaFactory.Model.IPizzaOrder" />
     public class PizzaOrder : PizzaBase, IPizzaOrder
     {
+        public PizzaOrder()
+        {}
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PizzaOrder"/> class.
         /// </summary>
@@ -41,7 +44,7 @@
         /// <value>
         /// The topping.
         /// </value>
-        public string Topping { get; }
+        public string Topping { get; set; }
 
         /// <summary>
         /// Gets the name of the base.

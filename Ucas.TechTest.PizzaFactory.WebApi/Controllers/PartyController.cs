@@ -1,21 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
-using Ucas.TechTest.PizzaFactory.Model;
+using Microsoft.Extensions.Logging;
 using Ucas.TechTest.PizzaFactory.Restaurant;
 
 namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
 {
     [ApiController]
-    [Route("menu")]
+    [Route("party")]
     public class PartyController : ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<PartyController> _logger;
         private readonly IPartyWriter _partyWriter;
 
-        public PartyController(ILogger logger, IPartyWriter partyWriter)
+        public PartyController(ILogger<PartyController> logger, IPartyWriter partyWriter)
         {
             _logger = logger;
             _partyWriter = partyWriter;

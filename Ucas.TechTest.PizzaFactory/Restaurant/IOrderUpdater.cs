@@ -7,8 +7,8 @@ namespace Ucas.TechTest.PizzaFactory.Restaurant
 {
     public interface IOrderUpdater
     {
-        Task UpdateOrderAsync(OrderStatus orderStatus);
-        Task UpdateOrderAsync(OrderStatus orderStatus, CancellationToken cancellationToken);
-        void UpdateOrder(OrderStatus orderStatus);
+        Task<bool> UpdateOrderAsync(string orderNumber, OrderStatus orderStatus);
+        Task<bool> UpdateOrderAsync(string orderNumber, OrderStatus orderStatus, CancellationToken cancellationToken);
+        bool UpdateOrder(string orderNumber, OrderStatus orderStatus);
     }
 }

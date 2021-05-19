@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
+using Microsoft.Extensions.Logging;
 using Ucas.TechTest.PizzaFactory.Model;
 using Ucas.TechTest.PizzaFactory.Restaurant;
 
@@ -12,13 +12,13 @@ namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
     [Route("orders")]
     public class OrdersController : ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<OrdersController> _logger;
         private readonly IOrderWriter _orderWriter;
         private readonly IOrderReader _orderReader;
         private readonly IOrdersReader _ordersReader;
         private readonly IOrderUpdater _ordersUpdater;
 
-        public OrdersController(ILogger logger, IOrderWriter orderWriter, IOrderReader orderReader, IOrdersReader ordersReader, IOrderUpdater ordersUpdater)
+        public OrdersController(ILogger<OrdersController> logger, IOrderWriter orderWriter, IOrderReader orderReader, IOrdersReader ordersReader, IOrderUpdater ordersUpdater)
         {
             _logger = logger;
             _orderWriter = orderWriter;
@@ -29,7 +29,7 @@ namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
 
         [Route("create")]
         [HttpPost]
-        public Task<IOrder> Post([FromBody] IEnumerable<IPizzaOrder> orderItems, CancellationToken cancellationToken)
+        public Task<IOrder> Post([FromBody] IEnumerable<PizzaOrder> orderItems, CancellationToken cancellationToken)
         {
             return this._orderWriter.CreateOrderAsync(orderItems, cancellationToken);
         }
@@ -50,9 +50,9 @@ namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
 
         [HttpPut]
         [Route("order/{orderNumber}/{orderStatus}")]
-        public Task UpdateOrder(OrderStatus orderStatus, CancellationToken cancellationToken)
+        public Task UpdateOrder(string orderNumber, OrderStatus orderStatus, CancellationToken cancellationToken)
         {
-            return this._ordersUpdater.UpdateOrderAsync(orderStatus, cancellationToken);
+            return this._ordersUpdater.UpdateOrderAsync(orderNumber, orderStatus, cancellationToken);
         }
     }
 }
