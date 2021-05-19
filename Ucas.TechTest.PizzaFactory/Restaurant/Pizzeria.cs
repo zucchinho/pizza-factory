@@ -40,18 +40,6 @@
         /// </summary>
         /// <param name="waiter">The waiter.</param>
         /// <param name="pizzaKitchen">The pizza kitchen.</param>
-        public Pizzeria(
-            IPizzeriaWaiter waiter, 
-            IPizzaKitchen pizzaKitchen)
-            : this(waiter, pizzaKitchen, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Pizzeria"/> class.
-        /// </summary>
-        /// <param name="waiter">The waiter.</param>
-        /// <param name="pizzaKitchen">The pizza kitchen.</param>
         /// <param name="logger">The logger.</param>
         /// <exception cref="System.ArgumentNullException">
         /// waiter
@@ -61,7 +49,7 @@
         public Pizzeria(
             IPizzeriaWaiter waiter, 
             IPizzaKitchen pizzaKitchen, 
-            ILogger logger)
+            ILogger logger = null)
         {
             this._waiter = waiter ?? throw new ArgumentNullException(nameof(waiter));
             this._pizzaKitchen = pizzaKitchen ?? throw new ArgumentNullException(nameof(pizzaKitchen));

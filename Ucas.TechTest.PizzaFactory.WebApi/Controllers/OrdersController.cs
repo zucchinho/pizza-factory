@@ -13,27 +13,18 @@ namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly ILogger _logger;
-        private readonly IMenuReader _menuReader;
         private readonly IOrderWriter _orderWriter;
         private readonly IOrderReader _orderReader;
         private readonly IOrdersReader _ordersReader;
         private readonly IOrderUpdater _ordersUpdater;
 
-        public OrdersController(ILogger logger, IMenuReader menuReader, IOrderWriter orderWriter, IOrderReader orderReader, IOrdersReader ordersReader, IOrderUpdater ordersUpdater)
+        public OrdersController(ILogger logger, IOrderWriter orderWriter, IOrderReader orderReader, IOrdersReader ordersReader, IOrderUpdater ordersUpdater)
         {
             _logger = logger;
-            _menuReader = menuReader;
             _orderWriter = orderWriter;
             _orderReader = orderReader;
             _ordersReader = ordersReader;
             _ordersUpdater = ordersUpdater;
-        }
-
-        [Route("menu")]
-        [HttpGet]
-        public Task<IPizzaMenu> GetMenu(CancellationToken cancellationToken)
-        {
-            return this._menuReader.GetMenuAsync(cancellationToken);
         }
 
         [Route("create")]
