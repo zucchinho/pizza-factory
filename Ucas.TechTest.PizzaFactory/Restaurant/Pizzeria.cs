@@ -16,15 +16,15 @@
         /// <summary>
         /// The waiter
         /// </summary>
-        private readonly IPizzeriaWaiter waiter;
+        private readonly IPizzeriaWaiter _waiter;
         /// <summary>
         /// The pizza kitchen
         /// </summary>
-        private readonly IPizzaKitchen pizzaKitchen;
+        private readonly IPizzaKitchen _pizzaKitchen;
         /// <summary>
         /// The logger
         /// </summary>
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// The default cooking interval ms lazy
@@ -63,10 +63,10 @@
             IPizzaKitchen pizzaKitchen, 
             ILogger logger)
         {
-            this.waiter = waiter ?? throw new ArgumentNullException(nameof(waiter));
-            this.pizzaKitchen = pizzaKitchen ?? throw new ArgumentNullException(nameof(pizzaKitchen));
+            this._waiter = waiter ?? throw new ArgumentNullException(nameof(waiter));
+            this._pizzaKitchen = pizzaKitchen ?? throw new ArgumentNullException(nameof(pizzaKitchen));
 
-            this.logger = logger ?? LogManager.CreateNullLogger();
+            this._logger = logger ?? LogManager.CreateNullLogger();
 
             // Add a simple delegate to return the default interval (from the config)
             this.OrderInterval += () => DefaultCookingIntervalMsLazy.Value;
@@ -102,43 +102,43 @@
                 // Increment counter
                 ++orderNumber;
 
-                this.logger.Info(
+                this._logger.Info(
                     "Beginning to process new order: {0}",
                     orderNumber);
 
                 try
                 {
                     // Get the next order via the waiter
-                    var nextOrder = this.waiter.GetNextOrder();
+                    var nextOrder = this._waiter.GetNextOrder();
 
                     // Wait for the kitchen to process the order
-                    await this.pizzaKitchen.ProcessOrderAsync(
+                    await this._pizzaKitchen.ProcessOrderAsync(
                         nextOrder,
                         cancellationToken);
                 }
                 catch (Exception ex)
                 {
-                    this.logger.Fatal(
+                    this._logger.Fatal(
                         ex,
                         "Something went wrong with order: {0}",
                         orderNumber);
                     throw;
                 }
 
-                this.logger.Info(
+                this._logger.Info(
                     "Finished processing order: {0}",
                     orderNumber);
 
                 if(orderNumber == partySize)
                 {
-                    this.logger.Info(
+                    this._logger.Info(
                         "That was the last order.");
                     continue;
                 }
 
                 // Simulate the cooking interval
                 var nextIntervalMs = this.OrderInterval.Invoke();
-                this.logger.Debug(
+                this._logger.Debug(
                     "Waiting for {0} milliseconds before processing next order.",
                     nextIntervalMs);
 

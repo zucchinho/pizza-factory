@@ -13,15 +13,15 @@
         /// <summary>
         /// The random
         /// </summary>
-        private static Random rnd;
+        private static Random _rnd;
         /// <summary>
         /// The pizza menu
         /// </summary>
-        private readonly IPizzaMenu pizzaMenu;
+        private readonly IPizzaMenu _pizzaMenu;
         /// <summary>
         /// The logger
         /// </summary>
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RpgWaiter"/> class.
@@ -43,10 +43,10 @@
             IPizzaMenu pizzaMenu, 
             ILogger logger)
         {
-            this.pizzaMenu = pizzaMenu ?? throw new ArgumentNullException(nameof(pizzaMenu));
-            this.logger = logger ?? LogManager.CreateNullLogger();
+            this._pizzaMenu = pizzaMenu ?? throw new ArgumentNullException(nameof(pizzaMenu));
+            this._logger = logger ?? LogManager.CreateNullLogger();
 
-            rnd = new Random();
+            _rnd = new Random();
         }
 
         /// <summary>
@@ -56,20 +56,20 @@
         public IPizzaOrder GetNextOrder()
         {
             // Get random base
-            var b = rnd.Next(
-                this.pizzaMenu.PizzaBases.Count);
-            var pizzaBase = this.pizzaMenu.PizzaBases[b];
+            var b = _rnd.Next(
+                this._pizzaMenu.PizzaBases.Count);
+            var pizzaBase = this._pizzaMenu.PizzaBases[b];
 
-            this.logger.Trace(
+            this._logger.Trace(
                 "Generated random pizza base: {0}",
                 pizzaBase.Name);
 
             // Get random topping
-            var t = rnd.Next(
-                this.pizzaMenu.Toppings.Count);
-            var topping = this.pizzaMenu.Toppings[t];
+            var t = _rnd.Next(
+                this._pizzaMenu.Toppings.Count);
+            var topping = this._pizzaMenu.Toppings[t];
 
-            this.logger.Trace(
+            this._logger.Trace(
                 "Generated random pizza topping",
                 topping);
 

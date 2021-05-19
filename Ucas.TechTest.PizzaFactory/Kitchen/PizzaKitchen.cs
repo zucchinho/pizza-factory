@@ -22,8 +22,8 @@
                 return Convert.ToDouble(ConfigurationManager.AppSettings["PizzaKitchen.TimePerToppingLetterMilliseconds"]);
             });
 
-        private readonly IPizzaOven pizzaOven;
-        private readonly ILogger logger;
+        private readonly IPizzaOven _pizzaOven;
+        private readonly ILogger _logger;
 
         public PizzaKitchen(
             IPizzaOven pizzaOven)
@@ -35,8 +35,8 @@
             IPizzaOven pizzaOven,
             ILogger logger)
         {
-            this.pizzaOven = pizzaOven ?? throw new ArgumentNullException(nameof(pizzaOven));
-            this.logger = logger ?? LogManager.CreateNullLogger();
+            this._pizzaOven = pizzaOven ?? throw new ArgumentNullException(nameof(pizzaOven));
+            this._logger = logger ?? LogManager.CreateNullLogger();
         }
 
         public async Task ProcessOrderAsync(
@@ -50,12 +50,12 @@
 
             cookingTimeMs += toppingMultiplier * TimePerToppingLetterMsLazy.Value;
 
-            this.logger.Debug(
+            this._logger.Debug(
                 "Calculated total cooking time for pizza: {0}ms",
                 cookingTimeMs);
 
             // Cook the pizza (in the oven)
-            await this.pizzaOven.CookAsync(
+            await this._pizzaOven.CookAsync(
                 pizzaOrder,
                 cookingTimeMs,
                 cancellationToken);

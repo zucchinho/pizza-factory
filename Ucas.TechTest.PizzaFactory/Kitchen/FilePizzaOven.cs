@@ -16,8 +16,8 @@
                 return ConfigurationManager.AppSettings["FilePizzaOven.OutputFilePath"];
             });
 
-        private readonly ILogger logger;
-        private CancellationTokenSource internalTokenSource;
+        private readonly ILogger _logger;
+        private CancellationTokenSource _internalTokenSource;
 
         public FilePizzaOven()
             : this(null)
@@ -27,13 +27,13 @@
         public FilePizzaOven(
             ILogger logger)
         {
-            this.logger = logger ?? LogManager.CreateNullLogger();
-            this.internalTokenSource = new CancellationTokenSource();
+            this._logger = logger ?? LogManager.CreateNullLogger();
+            this._internalTokenSource = new CancellationTokenSource();
 
             // Delete any left-over file
             if (File.Exists(OutputFilePathLazy.Value))
             {
-                this.logger.Warn(
+                this._logger.Warn(
                     "Output file already exists at: {0}",
                     OutputFilePathLazy.Value);
                 File.Delete(OutputFilePathLazy.Value);
@@ -49,7 +49,7 @@
                 pizzaOrder,
                 cookingTimeMs);
 
-            this.logger.Debug(
+            this._logger.Debug(
                 "Simulating cooking pizza {0} for {1}",
                 pizza,
                 cookingTimeMs);
@@ -59,7 +59,7 @@
                 TimeSpan.FromMilliseconds(cookingTimeMs),
                 cancellationToken);
 
-            this.logger.Debug(
+            this._logger.Debug(
                 "Finished cooking pizza. Writing to output file: {0}",
                 OutputFilePathLazy.Value);
 
@@ -73,7 +73,7 @@
             }
             catch (DirectoryNotFoundException ex)
             {
-                this.logger.Fatal(
+                this._logger.Fatal(
                     ex,
                     "The output file directory path does not exist: {0}",
                     OutputFilePathLazy.Value);

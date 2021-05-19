@@ -18,7 +18,7 @@
         /// <summary>
         /// The logger
         /// </summary>
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Defines the entry point of the application.
@@ -28,7 +28,7 @@
         {
             var partySize = Convert.ToInt32(
                 ConfigurationManager.AppSettings["PizzaFactory.PartySize"]);
-            logger.Info(
+            Logger.Info(
                 "Catering for party size: {0}",
                 partySize);
 
@@ -37,11 +37,11 @@
             {
                 ConfigureDependencies(container);
 
-                logger.Trace(
+                Logger.Trace(
                     "Creating a new instance of a pizzeria.");
                 var pizzeria = container.Resolve<IPizzeria>();
 
-                logger.Debug(
+                Logger.Debug(
                     "Beginning to cater for the party");
 
                 pizzeria.CaterAsync(
@@ -49,7 +49,7 @@
                     cts.Token).Wait(
                     cts.Token);
 
-                logger.Debug(
+                Logger.Debug(
                     "Finished catering for the party");
             }
         }
@@ -61,7 +61,7 @@
         private static void ConfigureDependencies(IUnityContainer container)
         {
             // Register the logger
-            container.RegisterInstance(logger, new ContainerControlledLifetimeManager());
+            container.RegisterInstance(Logger, new ContainerControlledLifetimeManager());
 
             // Register restaurant
             container.RegisterType<IPizzeria, Pizzeria>(new ContainerControlledLifetimeManager());
