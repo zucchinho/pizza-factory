@@ -1,0 +1,31 @@
+Web Client (Angular)
+  Order page
+    Display menu
+    Create an order
+    Get an update about an order
+  Updates page
+    See updates about your order
+  
+WebApi (.NET Core)
+  Endpoints
+    Customer
+      GetMenu - GET - returns available toppings and bases
+      CreateOrder - POST - requests order for some pizzas
+      GetUpdate - GET - returns an update for an order id
+    Staff
+      GetOrders - GET - gets all orders with a status, default to received orders
+      UpdateOrder - PUT - updates status of an order e.g., received, preparing, ready, en route, delivered, problem
+  Factory
+    Restaurant
+      Reads menu from the DB
+      Writes new orders to the DB
+      Reads updates for orders from DB
+    Kitchen
+      Reads orders from the database
+      Writes updates to orders to the DB
+    
+DB (NoSQL - Mongo?)
+  Stores orders
+  Stores menu items
+
+Run these locally in docker
