@@ -1,9 +1,7 @@
-﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+﻿using System.Collections.Generic;
 
-namespace Ucas.TechTest.PizzaFactory.Restaurant
+namespace Ucas.TechTest.PizzaFactory.Core.Model
 {
-    using System.Collections.Generic;
-
     /// <summary>
     /// Dummy implementation of a pizza menu (with hard-coded options for bases, toppings)
     /// </summary>

@@ -35,7 +35,7 @@ namespace Ucas.TechTest.PizzaFactory.Test
                 Task.FromResult(true));
 
             // Act
-            var pizzaKitchen = new PizzaKitchen(
+            var pizzaKitchen = new SingleOvenKitchen(
                 MockPizzaOven.Object,
                 MockLogger.Object);
             await pizzaKitchen.ProcessOrderAsync(

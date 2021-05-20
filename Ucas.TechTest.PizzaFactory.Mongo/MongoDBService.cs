@@ -7,7 +7,6 @@ using MongoDB.Driver;
 using Ucas.TechTest.PizzaFactory.Core.Model;
 using Ucas.TechTest.PizzaFactory.DataAccess.Model;
 using Ucas.TechTest.PizzaFactory.Mongo.Model;
-using Ucas.TechTest.PizzaFactory.Restaurant;
 
 namespace Ucas.TechTest.PizzaFactory.Mongo
 {

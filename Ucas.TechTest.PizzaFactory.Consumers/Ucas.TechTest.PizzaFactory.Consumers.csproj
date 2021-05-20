@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Ucas.TechTest.PizzaFactory.DataAccess\Ucas.TechTest.PizzaFactory.DataAccess.csproj" />
+      <ProjectReference Include="..\Ucas.TechTest.PizzaFactory\Ucas.TechTest.PizzaFactory.csproj" />
+    </ItemGroup>
+
+</Project>

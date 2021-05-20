@@ -70,7 +70,7 @@ namespace Ucas.TechTest.PizzaFactory.Console
             container.RegisterType<IPizzaMenu, DummyPizzaMenu>(new ContainerControlledLifetimeManager());
 
             // Register kitchen
-            container.RegisterType<IPizzaKitchen, PizzaKitchen>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IPizzaKitchen, SingleOvenKitchen>(new ContainerControlledLifetimeManager());
             container.RegisterType<IPizzaOven, FilePizzaOven>(new ContainerControlledLifetimeManager());
         }
     }
