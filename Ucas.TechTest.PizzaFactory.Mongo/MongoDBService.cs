@@ -189,7 +189,12 @@ namespace Ucas.TechTest.PizzaFactory.Mongo
 
         public bool UpdateOrder(string orderNumber, OrderStatus orderStatus)
         {
-            throw new NotImplementedException();
+            var result = this._orders.UpdateOne(
+                o => o.Id == orderNumber, 
+                Builders<Order>.Update.Set(o => o.Status, orderStatus), 
+                new UpdateOptions());
+
+            return result.IsAcknowledged && result.ModifiedCount > 0;
         }
     }
 }

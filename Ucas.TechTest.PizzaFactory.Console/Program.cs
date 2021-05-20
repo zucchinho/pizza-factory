@@ -1,4 +1,9 @@
-﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+﻿using Ucas.TechTest.PizzaFactory.Consumers.Kitchen;
+using Ucas.TechTest.PizzaFactory.Consumers.Restaurant;
+using Ucas.TechTest.PizzaFactory.Core.Model;
+using Ucas.TechTest.PizzaFactory.DataAccess.Model;
+using Ucas.TechTest.PizzaFactory.Mongo;
+using Ucas.TechTest.PizzaFactory.Mongo.Model;
 
 namespace Ucas.TechTest.PizzaFactory.Console
 {
@@ -66,12 +71,36 @@ namespace Ucas.TechTest.PizzaFactory.Console
 
             // Register restaurant
             container.RegisterType<IPizzeria, Pizzeria>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IPizzeriaWaiter, RpgWaiter>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IPizzaMenu, DummyPizzaMenu>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IPizzeriaWaiter, OnlineOrdersWaiter>(new ContainerControlledLifetimeManager());
+            // container.RegisterType<IPizzaMenu, DummyPizzaMenu>(new ContainerControlledLifetimeManager());
 
             // Register kitchen
-            container.RegisterType<IPizzaKitchen, SingleOvenKitchen>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IPizzaOven, FilePizzaOven>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IPizzaKitchen, MultipleOvenKitchen>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IPizzaOven, FilePizzaOven>(new TransientLifetimeManager());
+            Func<IPizzaOven> ovenFactory = () => container.Resolve<IPizzaOven>();
+            container.RegisterInstance(ovenFactory);
+            
+            // Register DataAccess
+            
+            container.RegisterSingleton<MongoDBService>();
+            container.RegisterInstance<IPizzeriaDatabaseSettings>(
+                new PizzeriaDatabaseSettings()
+                {
+                    BasesCollectionName = ConfigurationManager.AppSettings["MongoDB.BasesCollectionName"],
+                    OrdersCollectionName = ConfigurationManager.AppSettings["MongoDB.OrdersCollectionName"],
+                    PartiesCollectionName = ConfigurationManager.AppSettings["MongoDB.PartiesCollectionName"],
+                    ToppingsCollectionName = ConfigurationManager.AppSettings["MongoDB.ToppingsCollectionName"],
+                    ConnectionString = ConfigurationManager.AppSettings["MongoDB.ConnectionString"],
+                    DatabaseName = ConfigurationManager.AppSettings["MongoDB.DatabaseName"]
+                });
+
+            container.RegisterSingleton<MongoDBService>();
+            container.RegisterFactory<IOrderWriter>(cntr => cntr.Resolve<MongoDBService>());
+            container.RegisterFactory<IOrderUpdater>(cntr => cntr.Resolve<MongoDBService>());
+            container.RegisterFactory<IOrderReader>(cntr => cntr.Resolve<MongoDBService>());
+            container.RegisterFactory<IOrdersReader>(cntr => cntr.Resolve<MongoDBService>());
+            container.RegisterFactory<IPartyWriter>(cntr => cntr.Resolve<MongoDBService>());
+            container.RegisterFactory<IMenuReader>(cntr => cntr.Resolve<MongoDBService>());
         }
     }
 }

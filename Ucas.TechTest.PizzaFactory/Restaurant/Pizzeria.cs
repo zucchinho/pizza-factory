@@ -30,10 +30,7 @@
         /// The default cooking interval ms lazy
         /// </summary>
         private static readonly Lazy<double> DefaultCookingIntervalMsLazy = new Lazy<double>(
-            () =>
-            {
-                return Convert.ToDouble(ConfigurationManager.AppSettings["Pizzeria.DefaultOrderIntervalMilliseconds"]);
-            });
+            () => Convert.ToDouble(ConfigurationManager.AppSettings["Pizzeria.DefaultOrderIntervalMilliseconds"]));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Pizzeria"/> class.
@@ -75,7 +72,7 @@
             int partySize, 
             CancellationToken cancellationToken)
         {
-            if(partySize < 1)
+            if (partySize < 1)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(partySize),
