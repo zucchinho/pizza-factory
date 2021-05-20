@@ -32,12 +32,6 @@ namespace Ucas.TechTest.PizzaFactory.Console
         /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
-            var partySize = Convert.ToInt32(
-                ConfigurationManager.AppSettings["PizzaFactory.PartySize"]);
-            Logger.Info(
-                "Catering for party size: {0}",
-                partySize);
-
             using(var container = new UnityContainer())
             using (var cts = new CancellationTokenSource())
             {
@@ -51,7 +45,6 @@ namespace Ucas.TechTest.PizzaFactory.Console
                     "Beginning to cater for the party");
 
                 pizzeria.CaterAsync(
-                    partySize,
                     cts.Token).Wait(
                     cts.Token);
 

@@ -68,25 +68,12 @@
         /// <param name="partySize">Size of the party.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public async Task CaterAsync(
-            int partySize, 
-            CancellationToken cancellationToken)
+        public async Task CaterAsync(CancellationToken cancellationToken)
         {
-            if (partySize < 1)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(partySize),
-                    "Must be greater than zero.");
-            }
-
             var orderNumber = 0;
 
-            while (orderNumber < partySize
-                && !cancellationToken.IsCancellationRequested)
+            while (!cancellationToken.IsCancellationRequested)
             {
-                // Increment counter
-                ++orderNumber;
-
                 this._logger.Info(
                     "Beginning to process new order: {0}",
                     orderNumber);
@@ -96,10 +83,13 @@
                     // Get the next order via the waiter
                     var nextOrder = this._waiter.GetNextOrder();
 
-                    // Wait for the kitchen to process the order
-                    await this._pizzaKitchen.ProcessOrderAsync(
-                        nextOrder,
-                        cancellationToken);
+                    if (nextOrder != null)
+                    {
+                        // Wait for the kitchen to process the order
+                        await this._pizzaKitchen.ProcessOrderAsync(
+                            nextOrder,
+                            cancellationToken);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -113,13 +103,6 @@
                 this._logger.Info(
                     "Finished processing order: {0}",
                     orderNumber);
-
-                if(orderNumber == partySize)
-                {
-                    this._logger.Info(
-                        "That was the last order.");
-                    continue;
-                }
 
                 // Simulate the cooking interval
                 var nextIntervalMs = this.OrderInterval.Invoke();

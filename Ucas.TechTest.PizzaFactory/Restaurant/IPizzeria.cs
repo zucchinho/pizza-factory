@@ -15,8 +15,6 @@
         /// <param name="partySize">Size of the party.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        Task CaterAsync(
-            int partySize,
-            CancellationToken cancellationToken);
+        Task CaterAsync(CancellationToken cancellationToken);
     }
 }

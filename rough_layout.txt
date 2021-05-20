@@ -1,15 +1,15 @@
 Web Client (Angular)
   Create party
     Input party size?
-    Input table number?    
+    Input table number?   
   Order page
     Display menu for each person - let them choose
     Create an order
     Get an update about an order
   Updates page
-    See updates about your order
+    See updates about your order (polling interval)
   
-WebApi (.NET Core)
+ReST Api (.NET Core)
   Endpoints
     Customer
       Menu
@@ -18,7 +18,7 @@ WebApi (.NET Core)
         CreateOrder - POST - requests order for some pizzas
         GetUpdate - GET - returns an update for an order id
       Party
-        CreateParty - Post - party size and table number
+        CreateParty - POST - party size and table number
     Staff
       Orders
         GetOrders - GET - gets all orders with a status, default to received orders
@@ -32,6 +32,12 @@ WebApi (.NET Core)
     Kitchen
       Reads orders from the database
       Writes updates to orders to the DB
+
+Service
+  Check for parties - cater for them
+  Waiter gets single orders (1 pizza) from DB at a time
+  These are passed to the kitchen (this part will still be virtual)
+    Update the status of each order via the ReST API
     
 DB (NoSQL - Mongo?)
   Stores orders
