@@ -12,10 +12,7 @@ namespace Ucas.TechTest.PizzaFactory.Kitchen
     public class FilePizzaOven : IPizzaOven
     {
         private static readonly Lazy<string> OutputFilePathLazy = new Lazy<string>(
-            () =>
-            {
-                return ConfigurationManager.AppSettings["FilePizzaOven.OutputFilePath"];
-            });
+            () => ConfigurationManager.AppSettings["FilePizzaOven.OutputFilePath"]);
 
         private readonly ILogger _logger;
         private CancellationTokenSource _internalTokenSource;
@@ -30,15 +27,6 @@ namespace Ucas.TechTest.PizzaFactory.Kitchen
         {
             this._logger = logger ?? LogManager.CreateNullLogger();
             this._internalTokenSource = new CancellationTokenSource();
-
-            // Delete any left-over file
-            if (File.Exists(OutputFilePathLazy.Value))
-            {
-                this._logger.Warn(
-                    "Output file already exists at: {0}",
-                    OutputFilePathLazy.Value);
-                File.Delete(OutputFilePathLazy.Value);
-            }
         }
 
         public async Task CookAsync(

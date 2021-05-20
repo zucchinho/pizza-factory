@@ -63,14 +63,13 @@ namespace Ucas.TechTest.PizzaFactory.Consumers.Kitchen
                     if (received.Count >= correspondingOrder.Pizzas.Count())
                     {
                         // update the status of the order itself to received
-                        if (this._orderUpdater.UpdateOrder(
+                        this._orderUpdater.UpdateOrder(
                             correspondingOrder.OrderNumber,
-                            OrderStatus.Received))
-                        {
-                            return nextOrder.Value;
-                        }
+                            OrderStatus.Received);
                     }
                 }
+                
+                return nextOrder.Value;
             }
 
             return null;

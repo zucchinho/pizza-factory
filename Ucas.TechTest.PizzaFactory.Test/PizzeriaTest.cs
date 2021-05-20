@@ -48,8 +48,7 @@ namespace Ucas.TechTest.PizzaFactory.Test
                 MockPizzeriaWaiter.Object,
                 MockPizzaKitchen.Object,
                 MockLogger.Object);
-            await pizzeria.CaterAsync(
-                partySize,
+            await pizzeria.CaterAsync(                
                 dummyToken);
 
             // Assert
@@ -64,17 +63,19 @@ namespace Ucas.TechTest.PizzaFactory.Test
                         dummyToken),
                     Times.Once);
             }
-            for (int i = 1; i <= partySize; i++)
+            for (var i = 1; i <= partySize; i++)
             {
+                var i2 = i;
                 MockLogger.Verify(
                     l => l.Info(
                         "Beginning to process new order: {0}",
-                        i),
+                        i2),
                     Times.Once);
+                var i1 = i;
                 MockLogger.Verify(
                     l => l.Info(
                         "Finished processing order: {0}",
-                        i),
+                        i1),
                     Times.Once);
             }
         }

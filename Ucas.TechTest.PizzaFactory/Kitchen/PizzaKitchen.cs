@@ -12,10 +12,10 @@ namespace Ucas.TechTest.PizzaFactory.Kitchen
     public abstract class PizzaKitchen : IPizzaKitchen
     {
         private static readonly Lazy<double> BaseTimeMsLazy = new Lazy<double>(
-            () => Convert.ToDouble(ConfigurationManager.AppSettings["SingleOvenKitchen.BaseTimeMilliseconds"]));
+            () => Convert.ToDouble(ConfigurationManager.AppSettings["PizzaKitchen.BaseTimeMilliseconds"]));
 
         private static readonly Lazy<double> TimePerToppingLetterMsLazy = new Lazy<double>(
-            () => Convert.ToDouble(ConfigurationManager.AppSettings["SingleOvenKitchen.TimePerToppingLetterMilliseconds"]));
+            () => Convert.ToDouble(ConfigurationManager.AppSettings["PizzaKitchen.TimePerToppingLetterMilliseconds"]));
 
         private readonly ILogger _logger;
 

@@ -70,18 +70,13 @@
         /// <returns></returns>
         public async Task CaterAsync(CancellationToken cancellationToken)
         {
-            var orderNumber = 0;
-
             while (!cancellationToken.IsCancellationRequested)
             {
-                this._logger.Info(
-                    "Beginning to process new order: {0}",
-                    orderNumber);
-
                 try
                 {
                     // Get the next order via the waiter
                     var nextOrder = this._waiter.GetNextOrder();
+                    this._logger.Info("Beginning to process new order");
 
                     if (nextOrder != null)
                     {
@@ -95,14 +90,12 @@
                 {
                     this._logger.Fatal(
                         ex,
-                        "Something went wrong with order: {0}",
-                        orderNumber);
+                        "Something went wrong with order");
                     throw;
                 }
 
                 this._logger.Info(
-                    "Finished processing order: {0}",
-                    orderNumber);
+                    "Finished processing order");
 
                 // Simulate the cooking interval
                 var nextIntervalMs = this.OrderInterval.Invoke();
