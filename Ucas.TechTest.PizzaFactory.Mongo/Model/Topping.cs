@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Ucas.TechTest.PizzaFactory.Model;
-using Ucas.TechTest.PizzaFactory.Restaurant;
 
-namespace Ucas.TechTest.PizzaFactory.Mongo.Models
+namespace Ucas.TechTest.PizzaFactory.Mongo.Model
 {
     public class Topping
     {

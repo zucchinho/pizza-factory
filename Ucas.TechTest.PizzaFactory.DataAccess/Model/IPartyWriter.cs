@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using Ucas.TechTest.PizzaFactory.Model;
+using Ucas.TechTest.PizzaFactory.Core.Model;
 
-namespace Ucas.TechTest.PizzaFactory.Restaurant
+namespace Ucas.TechTest.PizzaFactory.DataAccess.Model
 {
     public interface IPartyWriter
     {

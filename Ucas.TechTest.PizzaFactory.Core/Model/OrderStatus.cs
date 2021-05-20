@@ -1,4 +1,4 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Model
+﻿namespace Ucas.TechTest.PizzaFactory.Core.Model
 {
     public enum OrderStatus
     {

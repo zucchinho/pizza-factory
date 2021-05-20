@@ -2,9 +2,9 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Serializers;
-using Ucas.TechTest.PizzaFactory.Model;
+using Ucas.TechTest.PizzaFactory.Core.Model;
 
-namespace Ucas.TechTest.PizzaFactory.Mongo.Models
+namespace Ucas.TechTest.PizzaFactory.Mongo.Model
 {
     public class Order : IOrder
     {

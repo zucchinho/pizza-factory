@@ -1,8 +1,9 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Kitchen
+﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+
+namespace Ucas.TechTest.PizzaFactory.Kitchen
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Ucas.TechTest.PizzaFactory.Model;
 
     /// <summary>
     /// Provides method signatures to cook pizzas

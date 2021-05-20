@@ -1,7 +1,7 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Model
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Ucas.TechTest.PizzaFactory.Core.Model
+{
     /// <summary>
     /// Represents a pizza menu comprised of available bases and toppings
     /// </summary>

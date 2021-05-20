@@ -1,13 +1,13 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Test
+﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+
+namespace Ucas.TechTest.PizzaFactory.Test
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using NLog;
     using Ucas.TechTest.PizzaFactory.Kitchen;
-    using Ucas.TechTest.PizzaFactory.Model;
 
     [TestClass]
     public class PizzaKitchenTest

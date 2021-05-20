@@ -1,7 +1,7 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Restaurant
-{
-    using Ucas.TechTest.PizzaFactory.Model;
+﻿using Ucas.TechTest.PizzaFactory.Core.Model;
 
+namespace Ucas.TechTest.PizzaFactory.Restaurant
+{
     /// <summary>
     /// Provides method signatures to generate pizza orders
     /// </summary>

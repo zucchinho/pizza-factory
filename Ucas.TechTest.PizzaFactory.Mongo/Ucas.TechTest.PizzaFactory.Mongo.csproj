@@ -9,6 +9,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Ucas.TechTest.PizzaFactory.Core\Ucas.TechTest.PizzaFactory.Core.csproj" />
+      <ProjectReference Include="..\Ucas.TechTest.PizzaFactory.DataAccess\Ucas.TechTest.PizzaFactory.DataAccess.csproj" />
       <ProjectReference Include="..\Ucas.TechTest.PizzaFactory\Ucas.TechTest.PizzaFactory.csproj" />
     </ItemGroup>
 

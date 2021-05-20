@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ucas.TechTest.PizzaFactory.Model
+namespace Ucas.TechTest.PizzaFactory.Core.Model
 {
     public interface IOrder
     {

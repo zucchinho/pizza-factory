@@ -1,4 +1,4 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Restaurant
+﻿namespace Ucas.TechTest.PizzaFactory.Core.Model
 {
 public interface IParty
     {

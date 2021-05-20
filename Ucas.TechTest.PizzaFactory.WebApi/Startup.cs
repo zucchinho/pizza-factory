@@ -3,14 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using NLog;
-using NLog.Extensions.Logging;
+using Ucas.TechTest.PizzaFactory.DataAccess.Model;
 using Ucas.TechTest.PizzaFactory.Mongo;
-using Ucas.TechTest.PizzaFactory.Mongo.Models;
-using Ucas.TechTest.PizzaFactory.Restaurant;
+using Ucas.TechTest.PizzaFactory.Mongo.Model;
 
 namespace Ucas.TechTest.PizzaFactory.WebApi
 {

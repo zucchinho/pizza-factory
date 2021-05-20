@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NLog;
-using Ucas.TechTest.PizzaFactory.Model;
-using Ucas.TechTest.PizzaFactory.Restaurant;
+using Ucas.TechTest.PizzaFactory.Core.Model;
+using Ucas.TechTest.PizzaFactory.DataAccess.Model;
 
 namespace Ucas.TechTest.PizzaFactory.WebApi.Controllers
 {

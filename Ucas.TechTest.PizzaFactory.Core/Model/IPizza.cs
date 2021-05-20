@@ -1,11 +1,11 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Model
-{
-    using System;
+﻿using System;
 
+namespace Ucas.TechTest.PizzaFactory.Core.Model
+{
     /// <summary>
     /// Represents a pizza
     /// </summary>
-    /// <seealso cref="Ucas.TechTest.PizzaFactory.Model.IPizzaOrder" />
+    /// <seealso cref="IPizzaOrder" />
     /// <seealso cref="System.IFormattable" />
     public interface IPizza : IPizzaOrder, IFormattable
     {

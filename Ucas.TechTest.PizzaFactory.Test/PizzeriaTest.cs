@@ -1,4 +1,6 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Test
+﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+
+namespace Ucas.TechTest.PizzaFactory.Test
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -6,7 +8,6 @@
     using Moq;
     using NLog;
     using Ucas.TechTest.PizzaFactory.Kitchen;
-    using Ucas.TechTest.PizzaFactory.Model;
     using Ucas.TechTest.PizzaFactory.Restaurant;
 
     [TestClass]

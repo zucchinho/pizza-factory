@@ -1,12 +1,13 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Restaurant
+﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+
+namespace Ucas.TechTest.PizzaFactory.Restaurant
 {
     using System.Collections.Generic;
-    using Ucas.TechTest.PizzaFactory.Model;
 
     /// <summary>
     /// Dummy implementation of a pizza menu (with hard-coded options for bases, toppings)
     /// </summary>
-    /// <seealso cref="Ucas.TechTest.PizzaFactory.Model.IPizzaMenu" />
+    /// <seealso cref="IPizzaMenu" />
     public class PizzaMenu : IPizzaMenu
     {
         /// <summary>

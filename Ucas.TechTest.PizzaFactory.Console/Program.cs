@@ -1,11 +1,12 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Console
+﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+
+namespace Ucas.TechTest.PizzaFactory.Console
 {
     using NLog;
     using System;
     using System.Configuration;
     using System.Threading;
     using Ucas.TechTest.PizzaFactory.Kitchen;
-    using Ucas.TechTest.PizzaFactory.Model;
     using Ucas.TechTest.PizzaFactory.Restaurant;
     using Unity;
     using Unity.Lifetime;

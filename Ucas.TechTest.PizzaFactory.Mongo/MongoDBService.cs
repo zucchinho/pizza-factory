@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MongoDB.Driver;
-using Ucas.TechTest.PizzaFactory.Model;
-using Ucas.TechTest.PizzaFactory.Mongo.Models;
+using Ucas.TechTest.PizzaFactory.Core.Model;
+using Ucas.TechTest.PizzaFactory.DataAccess.Model;
+using Ucas.TechTest.PizzaFactory.Mongo.Model;
 using Ucas.TechTest.PizzaFactory.Restaurant;
 
 namespace Ucas.TechTest.PizzaFactory.Mongo

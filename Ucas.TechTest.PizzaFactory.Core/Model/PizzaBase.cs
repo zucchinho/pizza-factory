@@ -1,9 +1,9 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Model
+﻿namespace Ucas.TechTest.PizzaFactory.Core.Model
 {
     /// <summary>
     /// Models data relevant to a pizza base
     /// </summary>
-    /// <seealso cref="Ucas.TechTest.PizzaFactory.Model.IPizzaBase" />
+    /// <seealso cref="IPizzaBase" />
     public class PizzaBase : IPizzaBase
     {
         public PizzaBase()

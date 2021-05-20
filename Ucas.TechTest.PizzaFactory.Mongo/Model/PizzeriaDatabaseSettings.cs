@@ -1,4 +1,4 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Mongo.Models
+﻿namespace Ucas.TechTest.PizzaFactory.Mongo.Model
 {
     public class PizzeriaDatabaseSettings : IPizzeriaDatabaseSettings
     {

@@ -1,4 +1,6 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Kitchen
+﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+
+namespace Ucas.TechTest.PizzaFactory.Kitchen
 {
     using NLog;
     using System;
@@ -6,7 +8,6 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Ucas.TechTest.PizzaFactory.Model;
 
     public class PizzaKitchen : IPizzaKitchen
     {

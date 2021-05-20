@@ -105,6 +105,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ucas.TechTest.PizzaFactory.Core\Ucas.TechTest.PizzaFactory.Core.csproj">
+      <Project>{696b5c73-3e95-4fc5-b8e8-44bc8786ecf0}</Project>
+      <Name>Ucas.TechTest.PizzaFactory.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ucas.TechTest.PizzaFactory\Ucas.TechTest.PizzaFactory.csproj">
       <Project>{7805685F-9292-4C3E-AE5F-2673C4DAA149}</Project>
       <Name>Ucas.TechTest.PizzaFactory</Name>

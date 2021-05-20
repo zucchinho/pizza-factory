@@ -1,8 +1,9 @@
-﻿namespace Ucas.TechTest.PizzaFactory.Restaurant
+﻿using Ucas.TechTest.PizzaFactory.Core.Model;
+
+namespace Ucas.TechTest.PizzaFactory.Restaurant
 {
     using NLog;
     using System;
-    using Ucas.TechTest.PizzaFactory.Model;
 
     /// <summary>
     /// Dummy implementation of a pizzeria waiter (randomly generates pizza order combinations)
